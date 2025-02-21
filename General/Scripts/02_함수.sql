@@ -743,11 +743,17 @@ FROM
 	EMPLOYEE;
 	
 
+-- EMPLOYEE 테이블에 존재하는 여자, 남자 사원 수 조회
 
-
-
-
-
+/* [결과]
+ *      여자   남자
+ * 1행   8      15
+ * */
+SELECT 
+	COUNT(DECODE(SUBSTR(EMP_NO,8,1), '2', '여자')) AS 여자,
+	COUNT(DECODE(SUBSTR(EMP_NO,8,1), '1', '남자')) AS 남자
+FROM 
+	EMPLOYEE ;
 
 
 
