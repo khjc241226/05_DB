@@ -334,6 +334,7 @@ WHERE DEPT_CODE IS NULL;
 
 
 -- * SET OPERATION(집합 연산)
+
 -- 여러 개의 SELECT 결과물을 하나의 쿼리로 만드는 연산자
 -- 여러가지의 조건이 있을 때 그에 해당하는 여러개의 결과값을 결합시키고 싶을때 사용
 -- 초보자들이 사용하기 쉽다.(조건들을 어떻게 엮어야 되는지 덜 생각해도 되니깐)
@@ -347,6 +348,30 @@ WHERE DEPT_CODE IS NULL;
 
 -- UNION : 여러개의 쿼리 결과를 하나로 합치는 연산자
 -- 중복된 영역을 제외하여 하나로 합친다.
+
+-- 부서코드가 'D5'인 사원의 이름, 부서코드, 직급코드 조회 
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM	EMPLOYEE
+WHERE	DEPT_CODE = 'D5'
+
+UNION -- 합집합 (중복되는 행 한 번만 출력)
+
+-- 직급 코드가 'J7'인 사원의 이름, 부서코드, 직급코드 조회
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM	EMPLOYEE
+WHERE	JOB_CODE = 'J7';
+
+
+-- 합집합의 결과는 OR 연산과 같다
+SELECT 
+	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM
+	EMPLOYEE
+WHERE
+	JOB_CODE = 'J7'
+OR
+	DEPT_CODE = 'D5';
+
 
 
 
