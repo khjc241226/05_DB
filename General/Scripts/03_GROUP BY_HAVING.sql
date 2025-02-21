@@ -374,19 +374,53 @@ OR
 
 
 
-
 -- INTERSECT : 여러개의 SELECT한 결과에서 공통 부분만 결과로 추출 (교집합)
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM	EMPLOYEE
+WHERE	DEPT_CODE = 'D5'
 
+INTERSECT
+
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM	EMPLOYEE
+WHERE	JOB_CODE = 'J7';
+
+-- 교집합의 결과는 AND 연산과 같다
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM EMPLOYEE
+WHERE	JOB_CODE = 'J7'
+AND	DEPT_CODE = 'D5';
 
 
 
 -- UNION ALL : 여러개의 쿼리 결과를 하나로 합치는 연산자
 -- UNION과의 차이점은 중복영역을 모두 포함시킨다. (합집합 +  교집합)
 
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM	EMPLOYEE
+WHERE	DEPT_CODE = 'D5'
+
+UNION ALL
+
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM	EMPLOYEE
+WHERE	JOB_CODE = 'J7';
 
 
--- MINUS : 선행 SELECT 결과에서 다음 SELECT 결과와 겹치는 부분을 제외한 나머지 부분만 추출(차집합)
--- 부서 코드 D5 중 급여가 400만 초과인 직원 제외
+
+
+-- MINUS : 선행 SELECT 결과에서 
+-- 다음 SELECT 결과와 겹치는 부분을 제외한 나머지 부분만 추출(차집합)
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM	EMPLOYEE
+WHERE	DEPT_CODE = 'D5'
+
+MINUS
+
+SELECT 	EMP_NAME, DEPT_CODE, JOB_CODE
+FROM	EMPLOYEE
+WHERE	JOB_CODE = 'J7';
+
 
 
 
