@@ -525,39 +525,146 @@ AND
 
 -- 1. 주민번호가 80년대 생이면서 성별이 여자이고, 성이 '전'씨인 직원들의 
 -- 사원명, 주민번호, 부서명, 직급명을 조회하시오.
-
+SELECT 
+	E.EMP_NAME, E.EMP_NO, D.DEPT_TITLE, J.JOB_NAME 
+FROM 
+	EMPLOYEE E
+JOIN 
+	DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID)
+JOIN 
+	JOB J ON (E.JOB_CODE = J.JOB_CODE)
+WHERE 
+	E.EMP_NO LIKE '8%'
+AND
+	SUBSTR(E.EMP_NO, 8, 1) = '2'
+AND
+	E.EMP_NAME LIKE '전%';
       
       
 -- 2. 이름에 '형'자가 들어가는 직원들의 사번, 사원명, 부서명을 조회하시오.
-
+SELECT
+	E.EMP_ID, E.EMP_NAME, D.DEPT_TITLE 
+FROM 
+	EMPLOYEE E
+JOIN 
+	DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID)
+WHERE 
+	E.EMP_NAME LIKE '%형%';
 
 
 -- 3. 해외영업 1부, 2부에 근무하는 사원의 
 -- 사원명, 직급명, 부서코드, 부서명을 조회하시오.
-
+SELECT
+	E.EMP_NAME, J.JOB_NAME, D.DEPT_ID, D.DEPT_TITLE 
+FROM 
+	EMPLOYEE E
+JOIN 
+	DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID)
+JOIN 
+	JOB J ON (E.JOB_CODE = J.JOB_CODE)
+WHERE
+	D.DEPT_TITLE IN ('해외영업1부', '해외영업2부')
+ORDER BY
+	E.EMP_ID ASC;
+	
 
 --4. 보너스포인트를 받는 직원들의 사원명, 보너스포인트, 부서명, 근무지역명을 조회하시오.
+SELECT 
+	E.EMP_NAME, E.BONUS, D.DEPT_TITLE, L.LOCAL_NAME 
+FROM 
+	EMPLOYEE E
+JOIN 
+	DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID)
+JOIN 
+	LOCATION L ON (D.LOCATION_ID = L.LOCAL_CODE)
+WHERE 
+	BONUS IS NOT NULL;
 
 
 --5. 부서가 있는 사원의 사원명, 직급명, 부서명, 지역명 조회
-
-
+SELECT 
+	E.EMP_NAME, J.JOB_NAME, D.DEPT_TITLE, L.LOCAL_NAME 
+FROM 
+	EMPLOYEE E
+JOIN 
+	JOB J ON (E.JOB_CODE = J.JOB_CODE)	
+INNER JOIN 
+	DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID)
+JOIN 
+	LOCATION L ON (D.LOCATION_ID = L.LOCAL_CODE);
+	
 -- 6. 급여등급별 최소급여(MIN_SAL)를 초과해서 받는 직원들의
 --사원명, 직급명, 급여, 연봉(보너스포함)을 조회하시오.
 --연봉에 보너스포인트를 적용하시오.
-
-
+SELECT 
+	E.EMP_NAME, J.JOB_NAME, E.SALARY, 
+	E.SALARY * (1 + NVL(BONUS,0)) * 12 "연봉"
+FROM 
+	EMPLOYEE E
+JOIN 
+	SAL_GRADE S ON (E.SAL_LEVEL = S.SAL_LEVEL)
+JOIN
+	JOB J ON (E.JOB_CODE = J.JOB_CODE)
+WHERE 
+	E.SALARY > S.MIN_SAL
+ORDER BY 
+	E.EMP_ID ASC;
 
 -- 7.한국(KO)과 일본(JP)에 근무하는 직원들의 
 -- 사원명, 부서명, 지역명, 국가명을 조회하시오.
-
-
+SELECT
+	E.EMP_NAME 사원명, 
+	D.DEPT_TITLE 부서명, 
+	L.LOCAL_NAME 지역명, 
+	N.NATIONAL_NAME 국가명 
+FROM 
+	EMPLOYEE E
+JOIN 
+	DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID)
+JOIN 	
+	LOCATION L ON (D.LOCATION_ID = L.LOCAL_CODE)
+JOIN
+	"NATIONAL" N ON (L.NATIONAL_CODE = N.NATIONAL_CODE)
+WHERE 
+	N.NATIONAL_NAME IN ('한국', '일본');
 
 -- 8. 같은 부서에 근무하는 직원들의 사원명, 부서코드, 동료이름을 조회하시오.
 -- SELF JOIN 사용
+SELECT
+	E1.EMP_NAME "사원명", 
+	E1.DEPT_CODE "부서코드", 
+	E2.EMP_NAME "동료이름" 
+FROM
+	EMPLOYEE E1
+JOIN
+	EMPLOYEE E2 ON (E1.DEPT_CODE = E2.DEPT_CODE)
+WHERE 
+	E1.EMP_NAME != E2.EMP_NAME
+ORDER BY 
+	"사원명" ASC;
 
 
 
--- 9. 보너스포인트가 없는 직원들 중에서 직급코드가 J4와 J7인 직원들의 사원명, 직급명, 급여를 조회하시오.
+-- 9. 보너스포인트가 없는 직원들 중에서 
+-- 직급코드가 J4와 J7인 직원들의 사원명, 직급명, 급여를 조회하시오.
 -- 단, JOIN, IN 사용할 것
+SELECT
+	E.EMP_NAME, J.JOB_NAME, E.SALARY 
+FROM
+	EMPLOYEE E
+JOIN
+	JOB J ON (E.JOB_CODE = J.JOB_CODE)
+WHERE 
+	E.JOB_CODE IN ('J4', 'J7')
+AND 
+	BONUS IS NULL;
+
+
+
+
+
+
+
+
+
 
