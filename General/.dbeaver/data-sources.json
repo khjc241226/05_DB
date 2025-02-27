@@ -77,6 +77,48 @@
 					"include": ["WORKBOOK"]
 				}
 			]
+		},
+		"oracle_thin-19544e82f7c-b86ab49c0266f00": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "공용DB-관리자(SYS)",
+			"save-password": true,
+			"configuration": {
+				"host": "112.221.156.34",
+				"port": "12345",
+				"database": "XE",
+				"url": "jdbc:oracle:thin:@//112.221.156.34:12345/XE",
+				"configurationType": "MANUAL",
+				"home": "C:\\app\\user1\\product\\18.0.0\\dbhomeXE",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		},
+		"oracle_thin-19545268e34-54267afcb2a5456b": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "TEST00_USER",
+			"save-password": true,
+			"configuration": {
+				"host": "112.221.156.34",
+				"port": "12345",
+				"database": "XE",
+				"url": "jdbc:oracle:thin:@//112.221.156.34:12345/XE",
+				"configurationType": "MANUAL",
+				"home": "C:\\app\\user1\\product\\18.0.0\\dbhomeXE",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
 		}
 	},
 	"connection-types": {

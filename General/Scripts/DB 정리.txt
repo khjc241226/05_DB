@@ -8,6 +8,7 @@ DBMS(DataBase Management System)
 SQL(Structured Query Language, 구조적 질의 언어)
 - 데이터를 조회, 조작, 관리하기 위해 사용하는 언어
 
+
 DQL(Data Query Language) : 데이터 질의 언어
 - 테이블에서 데이터를 조회하는 구문
 - SELECT
@@ -25,11 +26,20 @@ TCL(Transaction Control Language)
                 DB의 논리적 연산 단위
 
 
-DDL(Date Definition Language) : 데이터 정의 언어
+DDL(Data Definition Language) : 데이터 정의 언어
 - 객체를 만들고(CREATE), 수정하고(ALTER), 삭제(DROP)하는 구문
 
 
-DCL
+DCL(Data Controll Language) : 데이터 제어 언어
+- 계정 별로 권한 제어(부여, 회수)
+
+권한 부여 : GRANT 권한... TO 사용자명;
+
+권한 회수 : REVOKE 권한 ... FROM 사용자명;
+
+ROLE(역할) : 권한의 묶음
+- CONNECT : 접속 권한
+- RESOURCE : 기본 객체 8개 생성 권한
 
 -------------------------------------------------
 [SELECT 작성법]

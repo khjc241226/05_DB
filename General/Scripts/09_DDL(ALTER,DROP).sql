@@ -50,6 +50,7 @@ CREATE TABLE DEPT_COPY2
 AS SELECT * FROM DEPARTMENT;
 
 
+
 -- DEPT_COPY 테이블의 DEPT_TITLE 컬럼에 NOT NULL 제약조건 추가
 -- * NOT NULL 제약조건은 다루는 방법이 다름
 -->  NOT NULL을 제외한 제약 조건은 추가적인 조건으로 인식됨.(ADD/DROP)
@@ -272,21 +273,6 @@ RENAME TO DCOPY;
 
 SELECT * FROM DEPT_COPY; -- 테이블 존재 X
 SELECT * FROM DCOPY;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
